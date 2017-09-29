@@ -182,7 +182,8 @@ Elements acceptable within `<extension>`
 | [`<name>`](#name)| 1 |  |
 | [`<releaseDate>`](#releaseDate) | 1 |  |
 | [`<requires>`](#requires) | 0 or 1 |  |
-| [`<urls>`](#urls) | 1 |  |
+| [`<urls>`](#urls) | 1 |  | 
+| [`<ver>`](#ver) | 0 or 1 or more | |
 | [`<version>`](#version) | 1 |  |
 
 !!! tip "Legacy extensions: Payment, Report, Search"
