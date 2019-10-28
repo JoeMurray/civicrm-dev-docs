@@ -375,13 +375,14 @@ This creates three files:
     structure, see the [CiviReport Reference](/framework/civireport.md).
 -   `templates/CRM/Myextension/Form/Report/MyReport.tpl` contains the report's HTML template. This template usually delegates responsibility to a core template and does not need to be edited.
 
-If one of the existing reports is close to meeting your needs, but requires further PHP or SQL customization, you may simply make a new report based on that report. To copy a report, find the class-name of the original report within the `civicrm/CRM/Report/Form/` directory in the CiviCRM repository. Then run the `civix generate:report` command using the copy option from within your extension directory.
+If one of the existing reports is close to meeting your needs, it is often best practice to implement the alterReportVar hook to modify the columns, sql, or even rows though there can be performance concerns about invoking a hook for every row. When the changes are extensive or particularly finicky require more control about customizations to the PHP and SQL, you may simply make a new report based on that report. To copy a report, find the class-name of the original report within the `civicrm/CRM/Report/Form/` directory in the CiviCRM repository. Then run the `civix generate:report` command using the copy option from within your extension directory.
 
 For example, this command will copy the activity report in the class `CRM_Report_Form_Activity` to a new report within your extension: 
 
 ```bash
 civix generate:report --copy CRM_Report_Form_Activity MyActivity Contact
 ```
+It is best practice to avoid implementing functions in the extension's subclass if you are not making changes to them. If you are implementing an override of a function, thisFunction(), in the parent class, it is generally better for maintainability if you call parent::thisFunction() at the beginning of the subclass and then do your code to change behaviour than to cut and paste the code of the parent class's implementation of the function and make the changes to it. 
 
 ### Add a custom search {:#generate-search}
 
